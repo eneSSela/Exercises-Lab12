@@ -65,18 +65,20 @@ public class LogicsImpl implements Logics {
     }
 
     /**
-     * {@inheritDoc}
+     * Return the result using the pattern <<0|1|...|N>>.
      */
     @Override
     public String result() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return values.stream()
+            .map(String::valueOf)
+            .collect(Collectors.joining("|", "<<", ">>"));
     }
 
     /**
-     * {@inheritDoc}
+     * Returns true if all buttons have the same value.
      */
     @Override
     public boolean toQuit() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return values.stream().allMatch(v -> v.equals(values.get(0)));
     }
 }
