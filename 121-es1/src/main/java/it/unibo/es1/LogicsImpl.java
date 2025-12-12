@@ -1,5 +1,6 @@
 package it.unibo.es1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,8 @@ import java.util.List;
  */
 public class LogicsImpl implements Logics {
 
-    private static final String ERROR_MESSAGE = "Unimplemented method";
+    private final int size;
+    private final List<Integer> values = new ArrayList<>();
 
     /**
      * Constructor.
@@ -15,7 +17,10 @@ public class LogicsImpl implements Logics {
      * @param size the size of the logics
      */
     public LogicsImpl(final int size) {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        this.size = size;
+        for (int i = 0; i < size; i++) {
+            values.add(0);
+        }
     }
 
     /**
