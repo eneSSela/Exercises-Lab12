@@ -24,19 +24,19 @@ public class LogicsImpl implements Logics {
     }
 
     /**
-     * {@inheritDoc}
+     * Return the total number of buttons.
      */
     @Override
     public int size() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return this.size;
     }
 
     /**
-     * {@inheritDoc}
+     * Returns a copy of the list of the current values of the buttons.
      */
     @Override
     public List<Integer> values() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return new ArrayList<>(values);
     }
 
     /**
