@@ -10,10 +10,22 @@ public class LogicsImpl implements Logics {
 
     private final List<List<Boolean>> grid = new ArrayList<>();
 
+    /**
+     * Constructor that builds the grid.
+     */
+    public LogicsImpl(final int n) {
+        for (int i = 0; i < n; i++) {
+            final List<Boolean> row = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                row.add(false);
+            }
+            grid.add(row);
+        }
+    }
+
     @Override
     public String valueAt(int row, int col) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'valueAt'");
+        return grid.get(row).get(col) ? "*" : "";
     }
 
     @Override
