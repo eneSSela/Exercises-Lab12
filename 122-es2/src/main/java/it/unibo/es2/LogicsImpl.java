@@ -2,6 +2,7 @@ package it.unibo.es2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Implementation of the Logics Interface.
@@ -12,6 +13,8 @@ public class LogicsImpl implements Logics {
 
     /**
      * Constructor that builds the grid.
+     * 
+     * @param n the number of slots
      */
     public LogicsImpl(final int n) {
         for (int i = 0; i < n; i++) {
@@ -23,21 +26,36 @@ public class LogicsImpl implements Logics {
         }
     }
 
+    /**
+     * Returns the value at the position (row, col).
+     */
     @Override
-    public String valueAt(int row, int col) {
+    public String valueAt(final int row, final int col) {
         return grid.get(row).get(col) ? "*" : "";
     }
 
+    /**
+     * Change the value of the cell at the position (row, col).
+     */
     @Override
-    public void hit(int row, int col) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hit'");
+    public void hit(final int row, final int col) {
+        grid.get(row).set(col, !grid.get(row).get(col));
     }
 
+    /**
+     * Checks if the row or column are full.
+     */
     @Override
     public boolean toQuit() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toQuit'");
+
+        final boolean rowFull = grid.stream()
+            .anyMatch(r -> r.stream().allMatch(b -> b));
+
+        final boolean columnFull = IntStream.range(0, grid.size())
+            .anyMatch(c ->
+                grid.stream().allMatch(r -> r.get(c))
+            );
+
+        return rowFull || columnFull;
     }
-    
 }
