@@ -2,6 +2,7 @@ package it.unibo.es1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of the Logics interface.
@@ -40,19 +41,27 @@ public class LogicsImpl implements Logics {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the list of the enabled states of the buttons.
+     * A button is enabled if its value is less than the max (size).
      */
     @Override
     public List<Boolean> enabledStates() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return values.stream()
+            .map(v -> v < size)
+            .collect(Collectors.toList());
     }
 
     /**
-     * {@inheritDoc}
+     * Increment the value of the button at the index 'elem'.
+     * 
+     * @param elem index of the button to increment
+     * @return the new value of the button
      */
     @Override
     public int hit(final int elem) {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        final int newValue = values.get(elem) + 1;
+        values.set(elem, newValue);
+        return newValue;
     }
 
     /**
