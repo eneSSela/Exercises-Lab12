@@ -4,7 +4,7 @@ package it.unibo.es3;
  * Interface of the Logics.
  */
 public interface Logics {
-    
+
     /**
      * Returns the size of the grid.
      * 

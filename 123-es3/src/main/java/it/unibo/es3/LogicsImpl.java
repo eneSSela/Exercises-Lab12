@@ -79,5 +79,5 @@ public class LogicsImpl implements Logics {
     public boolean allActive() {
         return activeCells.size() == this.size * this.size;
     }
-    
+
 }
