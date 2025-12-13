@@ -3,6 +3,7 @@ package it.unibo.es3;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -36,26 +37,47 @@ public class LogicsImpl implements Logics {
         }
     }
 
+    /**
+     * Returns the size of the grid.
+     */
     @Override
     public int size() {
         return this.size;
     }
 
+    /**
+     * Checks if the cell is active.
+     */
     @Override
     public boolean isActive(final int row, final int col) {
         return activeCells.contains(new Pair<>(row, col));
     }
 
+    /**
+     * Calculate the next operation on the grid.
+     */
     @Override
     public void nextStep() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'nextStep'");
+        final List<Pair<Integer, Integer>> newCells = 
+            IntStream.range(0, this.size)
+                .boxed()
+                .flatMap(x -> IntStream.range(0, this.size)
+                        .mapToObj(y -> new Pair<>(x, y)))
+                .filter(p -> !activeCells.contains(p))
+                .filter(p -> activeCells.stream().anyMatch(a ->
+                        Math.abs(p.x() - a.x()) <= 1
+                        && Math.abs(p.y() - a.y()) <= 1
+                        && !p.equals(a)))
+                .toList();
+        activeCells.addAll(newCells);
     }
 
+    /**
+     * Returns if the grid have to close.
+     */
     @Override
     public boolean allActive() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'allActive'");
+        return activeCells.size() == this.size * this.size;
     }
     
 }
