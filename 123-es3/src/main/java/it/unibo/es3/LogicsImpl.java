@@ -38,14 +38,12 @@ public class LogicsImpl implements Logics {
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        return this.size;
     }
 
     @Override
-    public boolean isActive(int row, int col) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isActive'");
+    public boolean isActive(final int row, final int col) {
+        return activeCells.contains(new Pair<>(row, col));
     }
 
     @Override
